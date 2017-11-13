@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ "Profile"|trans }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2>{{ "User profile"|trans }}</h2>
+            {{ form_start(form) }}
+            {% set hiddenCollection = ["_token"] %}
+
+            {% for item in form %}
+
+                    {% if item.vars.name not in hiddenCollection %}
+                        {% set errorCollection = [] %}
+
+                        {% if(item.vars.name == "password") %}
+                            {% for pswd in item %}
+                                {% set errorCollectionPswd = [] %}
+
+                                <div class="form-group{% if errorCollectionPswd|length %} has-error{% endif %}">
+                                    {{ form_label(pswd) }}
+                                    {{ form_widget(pswd, {'attr' : {'class' : 'form-control'}}) }}
+                                    {% if errorCollectionPswd|length %}<p class="help-block">{{ errorCollectionPswd }}</p>{% endif %}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+
+                            <div class="form-group{% if errorCollection|length %} has-error{% endif %}">
+                                {{ form_label(item) }}
+
+
+                                {% if item.vars.name == "submit" %}
+                                    {{ form_widget(item) }}
+                                {% else %}
+                                    {{ form_widget(item, {'attr' : {'class' : 'form-control'}}) }}
+                                {% endif %}
+                                {% if errorCollection|length %}<p class="help-block">{{ errorCollection }}</p>{% endif %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                {% endfor %}
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

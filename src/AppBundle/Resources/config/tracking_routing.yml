@@ -1,0 +1,18 @@
+tracking_index:
+    path:     /
+    defaults: { _controller: AppBundle:Tracking:index }
+tracking_order:
+    path:     /order
+    defaults: { _controller: AppBundle:Tracking:order }
+
+tracking_track:
+    path: order/track
+    defaults: { _controller: AppBundle:Tracking:track }
+
+tracking_order_status:
+    path: order/status/change
+    defaults: { _controller: AppBundle:Tracking:orderStatus }
+
+tracking_update_marker:
+    path: order/marker/update
+    defaults: { _controller: AppBundle:Tracking:updateMarker }

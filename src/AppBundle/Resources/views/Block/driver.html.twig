@@ -1,0 +1,32 @@
+<h4 title="{% if driver.working %}{{ "Working"|trans }}{% else %}{{ "Not working"|trans }}{% endif %}"><b style="color:{% if driver.working %}green{% else %}red{% endif %};">#{{ driver.id }} {{ driver.name }}</b> - {{ "Driver"|trans }}</h4>
+{% for order in orderCollection %}
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <td class="active" colspan="2" align="center">
+                <b>#{{ order.id }}</b> - {{ "Client"|trans }} <a href="tel:{{ order.phone }}" title="{{ "Call to client"|trans }}">{{ order.name }}</a>
+                {% if order.comment != null %}<br/>
+                    <p>{{ order.comment }}</p>
+                {% endif %}
+            </td>
+        </tr>
+
+        {% if order.status == 'assigned' %}
+        <tr>
+            <td><b>{{ "From"|trans }}</b></td>
+            <td>{{ order.pickupAddress }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td><b>{{ "To"|trans }}</b></td>
+            <td>{{ order.destinationAddress }}</td>
+        </tr>
+        <tfoot>
+            <tr>
+                <td colspan="2" align="center">
+                    <button class="btn btn-sm btn-success order-action" data-status="{% if order.status == 'assigned' %}picked{% else %}finished{% endif %}" data-id="{{ order.id }}">{% if order.status == 'assigned' %}{{ "Picked"|trans }}{% else %}{{ "Finish"|trans }}{% endif %}</button>
+                    <button class="btn btn-sm btn-danger order-action" data-status="canceled" data-id="{{ order.id }}">{{ "Cancel"|trans }}</button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+{% endfor %}

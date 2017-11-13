@@ -1,0 +1,6 @@
+user:
+    resource: "user_routing.yml"
+    prefix: /user
+tracking:
+    resource: "tracking_routing.yml"
+    prefix:
