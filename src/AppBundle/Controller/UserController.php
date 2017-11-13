@@ -12,19 +12,14 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class UserController extends Controller
 {
 
-    public function loginAction(Request $request, AuthenticationUtils $authUtils)
+    public function loginAction(Request $request)
     {
-        $error = $authUtils->getLastAuthenticationError();
-        $lastUsername = $authUtils->getLastUsername();
 
         if($this->getUser()) {
             return $this->redirect($this->generateUrl("tracking_index"));
         }
 
-        return $this->render('@App/User/login.html.twig', [
-            'error' => $error,
-            'last_username' => $lastUsername
-        ]);
+        return $this->render('@App/User/login.html.twig', []);
     }
 
     public function logoutAction(){}

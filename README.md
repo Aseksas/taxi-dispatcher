@@ -11,3 +11,7 @@ installation:
 $ php bin/console dispatcher:user:create --username username --password password --email email@email.com
 
 5. go to http://domain.com/user/login and start working :)
+
+![Route painting](https://i.snag.gy/zODtj0.jpg)
+![New order](https://i.snag.gy/cknMoG.jpg)
+
