@@ -1,7 +1,33 @@
-{% extends "::base.html.twig" %}
-
-{% block title %}AppBundle:Employee:form{% endblock %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Welcome to the Employee:form page</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10"><h4>{% if edit %}{{ "Driver update"|trans }}{% else %}{{ "Driver create"|trans }}{% endif %}</h4></div>
+            <div class="col-sm-2 text-right"> <a class="btn btn-default" href="{{ path('driver_index') }}">Back to the list</a></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                {{ form_start(form) }}
+                    {% set hiddenCollection = ["_token"] %}
+                    {% for item in form %}
+                        {% if item.vars.name not in hiddenCollection %}
+                            {% set errorCollection = item.vars.errors %}
+                            <div class="form-group{% if errorCollection|length %} has-error{% endif %}">
+                                {{ form_label(item) }}
+                                {% if(item.vars.name in ["isActive", "isWorking"]) %}
+                                    {{ form_widget(item) }}
+                                {% else %}
+                                    {{ form_widget(item, {'attr' : {'class' : 'form-control'}}) }}
+                                {% endif %}
+                                {% if errorCollection|length %}<p class="help-block">{{ errorCollection }}</p>{% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    <input type="submit" class="btn btn-success" value="{% if edit %}{{ "Update"|trans }}{% else %}{{ "Create"|trans }}{% endif %}" />
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,7 +1,46 @@
-{% extends "::base.html.twig" %}
-
-{% block title %}AppBundle:Employee:index{% endblock %}
-
+{% extends 'base.html.twig' %}
+{% block title %}{{ "Driver"|trans }}{% endblock %}
 {% block body %}
-<h1>Welcome to the Employee:index page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10">
+                <h4>Drivers list</h4>
+            </div>
+            <div class="col-sm-2 text-right">
+                <a href="{{ path('driver_form') }}" class="btn btn-success">Create a new driver</a>
+            </div>
+            <div class="col-sm-12">
+                <table class="table table-bordered table-responsive table-striped">
+                    <thead>
+                        <tr>
+                            <th align="center">#</th>
+                            <th>{{ "Name"|trans }}</th>
+                            <th>{{ "Phone"|trans }}</th>
+                            <th>{{ "Imei"|trans }}</th>
+                            <th>{{ "Working"|trans }}</th>
+                            <th>{{ "Active"|trans }}</th>
+                            <th>{{ "Date updated"|trans }}</th>
+                            <th>{{ "Date created"|trans }}</th>
+                            <th class="text-center">{{ "Actions"|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for driver in drivers %}
+                        <tr>
+                            <td align="center">{{ driver.id }}</td>
+                            <td>{{ driver.name }}</td>
+                            <td>{{ driver.phone }}</td>
+                            <td>{{ driver.imei }}</td>
+                            <td>{% if driver.isWorking %}Yes{% else %}No{% endif %}</td>
+                            <td>{% if driver.isActive %}Yes{% else %}No{% endif %}</td>
+                            <td align="center">{% if driver.dateUpdated %}{{ driver.dateUpdated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td align="center">{% if driver.dateCreated %}{{ driver.dateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
+                            <td class="text-center"><a class="btn btn-sm btn-action btn-success" href="{{ path('driver_form', { 'id': driver.id }) }}">{{ "edit"|trans }}</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}
