@@ -3,5 +3,5 @@ employee_index:
     defaults: { _controller: AppBundle:Employee:index }
 
 employee_form:
-    path:     /form
-    defaults: { _controller: AppBundle:Employee:form }
+    path:     /form/{id}
+    defaults: { _controller: AppBundle:Employee:form, id: null }

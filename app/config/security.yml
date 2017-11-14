@@ -30,6 +30,7 @@ security:
 
     access_control:
         - { path: ^/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user, roles: ROLE_USER }
         - { path: ^/driver, roles: ROLE_LOGISTIC }
         - { path: ^/employee, roles: ROLE_ADMIN }

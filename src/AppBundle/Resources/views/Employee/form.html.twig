@@ -13,16 +13,27 @@
                     {% set hiddenCollection = ["_token"] %}
                     {% for item in form %}
                         {% if item.vars.name not in hiddenCollection %}
-                            {% set errorCollection = item.vars.errors %}
-                            <div class="form-group{% if errorCollection|length %} has-error{% endif %}">
-                                {{ form_label(item) }}
-                                {% if(item.vars.name in ["isActive", "isWorking"]) %}
-                                    {{ form_widget(item) }}
-                                {% else %}
-                                    {{ form_widget(item, {'attr' : {'class' : 'form-control'}}) }}
-                                {% endif %}
-                                {% if errorCollection|length %}<p class="help-block">{{ errorCollection }}</p>{% endif %}
-                            </div>
+                            {% if item.vars.name == "password" %}
+                                {% for iP in item %}
+                                    {% set errorCollection = iP.vars.errors %}
+                                    <div class="form-group{% if errorCollection|length %} has-error{% endif %}">
+                                        {{ form_label(iP) }}
+                                        {{ form_widget(iP, {'attr' : {'class' : 'form-control'}}) }}
+                                        {% if errorCollection|length %}<p class="help-block">{{ errorCollection }}</p>{% endif %}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% set errorCollection = item.vars.errors %}
+                                <div class="form-group{% if errorCollection|length %} has-error{% endif %}">
+                                    {{ form_label(item) }}
+                                    {% if(item.vars.name in ["isActive"]) %}
+                                        {{ form_widget(item) }}
+                                    {% else %}
+                                        {{ form_widget(item, {'attr' : {'class' : 'form-control'}}) }}
+                                    {% endif %}
+                                    {% if errorCollection|length %}<p class="help-block">{{ errorCollection }}</p>{% endif %}
+                                </div>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                     <input type="submit" class="btn btn-success" value="{% if edit %}{{ "Update"|trans }}{% else %}{{ "Create"|trans }}{% endif %}" />

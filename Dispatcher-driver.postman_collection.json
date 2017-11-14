@@ -1,0 +1,111 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Dispatcher-driver",
+		"_postman_id": "a62ece34-f3ec-5466-27dc-66df1b5d008b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"url": "http://dispatcher.dev/app_dev.php/api/driver/login/2151511",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Driver detail update",
+			"request": {
+				"url": "http://dispatcher.dev/app_dev.php/api/driver",
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Api-Authorization",
+						"value": "6a3ed8df1d9aeca61adf216e218a349f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "latitude",
+							"value": "54.01255",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "longitude",
+							"value": "24.512545",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "working",
+							"value": "false",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Get driver order list",
+			"request": {
+				"url": "http://dispatcher.dev/app_dev.php/api/order/list",
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Api-Authorization",
+						"value": "6a3ed8df1d9aeca61adf216e218a349f",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Change order status",
+			"request": {
+				"url": "http://dispatcher.dev/app_dev.php/api/order/update",
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Api-Authorization",
+						"value": "6a3ed8df1d9aeca61adf216e218a349f",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "order id",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "picked or finished",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

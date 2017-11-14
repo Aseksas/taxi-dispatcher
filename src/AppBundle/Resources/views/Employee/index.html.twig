@@ -7,35 +7,29 @@
                 <h4>Drivers list</h4>
             </div>
             <div class="col-sm-2 text-right">
-                <a href="{{ path('driver_form') }}" class="btn btn-success">Create a new driver</a>
+                <a href="{{ path('employee_form') }}" class="btn btn-success">Create a new employee</a>
             </div>
             <div class="col-sm-12">
                 <table class="table table-bordered table-responsive table-striped">
                     <thead>
                         <tr>
                             <th align="center">#</th>
-                            <th>{{ "Name"|trans }}</th>
-                            <th>{{ "Phone"|trans }}</th>
-                            <th>{{ "Imei"|trans }}</th>
-                            <th>{{ "Working"|trans }}</th>
+                            <th>{{ "Username"|trans }}</th>
+                            <th>{{ "Email"|trans }}</th>
+                            <th>{{ "Roles"|trans }}</th>
                             <th>{{ "Active"|trans }}</th>
-                            <th>{{ "Date updated"|trans }}</th>
-                            <th>{{ "Date created"|trans }}</th>
                             <th class="text-center">{{ "Actions"|trans }}</th>
                         </tr>
                     </thead>
                     <tbody>
-                    {% for driver in drivers %}
+                    {% for item in collection %}
                         <tr>
-                            <td align="center">{{ driver.id }}</td>
-                            <td>{{ driver.name }}</td>
-                            <td>{{ driver.phone }}</td>
-                            <td>{{ driver.imei }}</td>
-                            <td>{% if driver.isWorking %}Yes{% else %}No{% endif %}</td>
-                            <td>{% if driver.isActive %}Yes{% else %}No{% endif %}</td>
-                            <td align="center">{% if driver.dateUpdated %}{{ driver.dateUpdated|date('Y-m-d H:i:s') }}{% endif %}</td>
-                            <td align="center">{% if driver.dateCreated %}{{ driver.dateCreated|date('Y-m-d H:i:s') }}{% endif %}</td>
-                            <td class="text-center"><a class="btn btn-sm btn-action btn-success" href="{{ path('driver_form', { 'id': driver.id }) }}">{{ "edit"|trans }}</a></td>
+                            <td align="center">{{ item.id }}</td>
+                            <td>{{ item.username }}</td>
+                            <td>{{ item.email }}</td>
+                            <td>{{ item.rolesView()|trans }}</td>
+                            <td>{% if item.active %}Yes{% else %}No{% endif %}</td>
+                            <td class="text-center"><a class="btn btn-sm btn-action btn-success" href="{{ path('employee_form', { 'id': item.id }) }}">{{ "edit"|trans }}</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>

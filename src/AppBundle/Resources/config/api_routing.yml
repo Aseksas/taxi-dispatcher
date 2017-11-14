@@ -1,0 +1,12 @@
+api_login:
+    path:     /driver/login/{imei}
+    defaults: { _controller: AppBundle:Api:login }
+api_driver_detail:
+    path:     /driver
+    defaults: { _controller: AppBundle:Api:driver }
+api_get_order:
+    path:     /order/list
+    defaults: { _controller: AppBundle:Api:get }
+api_driver_order-update:
+    path:     /order/update
+    defaults: { _controller: AppBundle:Api:update }

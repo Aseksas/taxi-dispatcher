@@ -4,14 +4,14 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 class EmployeeController extends Controller
 {
     public function indexAction()
     {
         return $this->render('@App/Employee/index.html.twig', array(
-            'employee' => $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findAll(),
+            'collection' => $this->getDoctrine()->getManager()->getRepository('AppBundle:User')->findAll(),
         ));
     }
 
@@ -25,13 +25,7 @@ class EmployeeController extends Controller
             $obj = new User();
         }
         $t = $this->get('translator');
-        $form = $this->createForm('AppBundle\Form\DriverType', $obj);
-        $form->remove('dateCreated');
-        $form->remove('dateUpdated');
-        $form->remove('latitude');
-        $form->remove('longitude');
-        $form->remove('isWorking');
-        $form->remove('token');
+        $form = $this->createForm('AppBundle\Form\EmployeeType', $obj);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

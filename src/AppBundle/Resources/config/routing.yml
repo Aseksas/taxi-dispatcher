@@ -9,3 +9,6 @@ driver:
 employee:
     resource: "employee_routing.yml"
     prefix: /employee
+api:
+    resource: "api_routing.yml"
+    prefix: /api

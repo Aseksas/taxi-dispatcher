@@ -82,7 +82,12 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_LOGISTIC');
+        return array('ROLE_ADMIN');
+    }
+
+    public function getRolesView()
+    {
+        return implode(",", $this->getRoles());
     }
 
     public function eraseCredentials()
