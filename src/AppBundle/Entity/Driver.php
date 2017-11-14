@@ -22,7 +22,7 @@ class Driver
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Order", mappedBy="driverId")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Order", mappedBy="driver")
      */
     private $orderCollection;
 

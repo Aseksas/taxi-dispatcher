@@ -1,0 +1,10 @@
+driver_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Driver:index" }
+    methods:  GET
+
+driver_form:
+    path:     /form/{id}
+    defaults: { _controller: "AppBundle:Driver:form", id: null }
+    methods:  [GET, POST]
+

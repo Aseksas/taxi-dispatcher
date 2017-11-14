@@ -5,7 +5,3 @@ employee_index:
 employee_form:
     path:     /form
     defaults: { _controller: AppBundle:Employee:form }
-
-employee_delete:
-    path:     /delete
-    defaults: { _controller: AppBundle:Employee:delete }
