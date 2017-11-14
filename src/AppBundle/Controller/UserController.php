@@ -34,13 +34,13 @@ class UserController extends Controller
         $formBuilder->add('username', null, ['disabled' => true]);
         $formBuilder->add('email');
         $formBuilder->add('password', RepeatedType::class, array(
-        'type' => PasswordType::class,
-        'invalid_message' => 'The password fields must match.',
-        'options' => ['attr' => ['class' => 'password-field']],
-        'required' => false,
-        'first_options'  => ['label' => 'Password'],
-        'second_options' => ['label' => 'Repeat Password'],
-    ));
+            'type' => PasswordType::class,
+            'invalid_message' => 'The password fields must match.',
+            'options' => ['attr' => ['class' => 'password-field']],
+            'required' => false,
+            'first_options'  => ['label' => 'Password'],
+            'second_options' => ['label' => 'Repeat Password'],
+        ));
         $formBuilder->add('submit', SubmitType::class, ['attr' => ['class' => 'btn btn-success']]);
 
         $form = $formBuilder->getForm();

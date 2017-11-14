@@ -33,6 +33,7 @@
 
                                 {% if item.vars.name == "submit" %}
                                     {{ form_widget(item) }}
+                                    {{ " * don't enter password if you don't change it"|trans }}
                                 {% else %}
                                     {{ form_widget(item, {'attr' : {'class' : 'form-control'}}) }}
                                 {% endif %}
