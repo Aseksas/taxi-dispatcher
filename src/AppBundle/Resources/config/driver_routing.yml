@@ -1,0 +1,11 @@
+driver_index:
+    path:     /index
+    defaults: { _controller: AppBundle:Driver:index }
+
+driver_form:
+    path:     /form
+    defaults: { _controller: AppBundle:Driver:form }
+
+driver_delete:
+    path:     /delete
+    defaults: { _controller: AppBundle:Driver:delete }

@@ -23,6 +23,14 @@ security:
                 path:   user_logout
                 target: user_login
                 invalidate_session: false
+
+    role_hierarchy:
+          ROLE_ADMIN:       [ROLE_USER, ROLE_LOGISTIC]
+          ROLE_LOGISTIC:    [ROLE_USER]
+
     access_control:
         - { path: ^/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/driver, roles: ROLE_LOGISTIC }
+        - { path: ^/employee, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USER }

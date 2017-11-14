@@ -39,19 +39,22 @@ class MenuService
         foreach ($this->bundleCollection as $key => $bundle) {
 
             if(method_exists($bundle, 'getMenu')) {
-                $menuBundle = $bundle->getMenu();
-                $accessGranted = true;
-                if(isset($menuBundle['roles']) && count($menuBundle['roles'])) {
-                    $accessGranted = false;
-                    foreach ($menuBundle['roles'] as $role) {
-                        if($this->security->isGranted($role)) {
-                            $accessGranted = true;
-                            break;
+                $menuBundleCollection = $bundle->getMenu();
+
+                foreach ($menuBundleCollection as $menuItem) {
+                    $accessGranted = true;
+                    if(isset($menuItem['roles']) && count($menuItem['roles'])) {
+                        $accessGranted = false;
+                        foreach ($menuItem['roles'] as $role) {
+                            if($this->security->isGranted($role)) {
+                                $accessGranted = true;
+                                break;
+                            }
                         }
                     }
-                }
-                if($accessGranted) {
-                    $menuCollection = array_merge($menuCollection, $menuBundle);
+                    if($accessGranted) {
+                        $menuCollection[] = $menuItem;
+                    }
                 }
             }
         }

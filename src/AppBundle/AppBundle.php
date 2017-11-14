@@ -11,11 +11,19 @@ class AppBundle extends Bundle
         $t = $this->container->get('translator');
 
         return [
-            'tracking' => [
+            [
                 'name' => $t->trans('Tracking'),
                 'route' => 'tracking_index',
-                'roles' => ['ROLE_ADMIN', 'ROLE_USER'],
-                'child' => []
+            ],
+            [
+                'name' => $t->trans('Driver'),
+                'route' => 'driver_index',
+                'roles' => ['ROLE_LOGISTIC']
+            ],
+            [
+                'name' => $t->trans('Employee'),
+                'route' => 'employee_index',
+                'roles' => ['ROLE_ADMIN']
             ]
         ];
     }
