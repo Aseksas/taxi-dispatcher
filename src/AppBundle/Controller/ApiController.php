@@ -22,7 +22,7 @@ class ApiController extends Controller
 
         $response = ['success' => true, 'code' => 200];
         try {
-            $driver = $this->getDoctrine()->getRepository('AppBundle:Driver')->findOneBy(['imei' => $imei]);
+            $driver = $this->getDoctrine()->getRepository('AppBundle:Driver')->findOneBy(['imei' => $imei, 'isActive' => 1]);
             if (!$driver) {
                 throw new AccessDeniedHttpException('Driver not found');
             }
@@ -175,7 +175,8 @@ class ApiController extends Controller
         $driver = $this->getDoctrine()
             ->getRepository('AppBundle:Driver')
             ->findOneBy([
-                'token' => $request->headers->get('x-api-authorization')
+                'token' => $request->headers->get('x-api-authorization'),
+                'isActive' => 1
             ]);
 
         if (!$driver) {
