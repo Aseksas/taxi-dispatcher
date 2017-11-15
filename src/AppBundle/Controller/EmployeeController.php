@@ -24,15 +24,32 @@ class EmployeeController extends Controller
             $edit = false;
             $obj = new User();
         }
+
+        if($edit && $obj) {
+            $editObj = clone $obj;
+        }
+
         $t = $this->get('translator');
-        $form = $this->createForm('AppBundle\Form\EmployeeType', $obj);
+        $form = $this->createForm('AppBundle\Form\EmployeeType', $obj, ['edit' => $edit]);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @var $usr User
+             */
+            $usr = $form->getData();
+
+            if(empty($usr->getPassword())) {
+                $usr->setPassword($editObj->getPassword());
+            } else {
+                $encoder = $this->get('security.encoder_factory')->getEncoder($usr);
+                $usr->setPassword($encoder->encodePassword($usr->getPassword(), $usr->getSalt()));
+            }
+
             $em = $this->getDoctrine()->getManager();
-            $em->persist($obj);
+            $em->persist($usr);
             $em->flush();
             $this->addFlash('success', $t->trans($edit ? "Successfully updated" : "Successfully created"));
-            return $this->redirectToRoute('employee_form', array('id' => $obj->getId()));
+            return $this->redirectToRoute('employee_form', array('id' => $usr->getId()));
         }
 
         return $this->render('@App/Employee/form.html.twig', [
